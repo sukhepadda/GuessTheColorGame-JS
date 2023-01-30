@@ -3,6 +3,7 @@ const optionDiv = document.getElementById("optionDiv");
 const scoreDiv =  document.getElementById('score');
 let randomColor = null;
 let score = 0;
+let fails = 3;
 
 function randomNumberGeneratorBetween(min, max) {
   return min + Math.floor(Math.random() * (max - min + 1));
@@ -25,9 +26,15 @@ function resultValidate(el) {
   if (selectedColor === randomColor) {
     scoreIncreamentor();
   } else {
-    alert('looser');
-    score = 0;
-    scoreDiv.innerHTML = score;
+    if(fails > 1){
+      fails --;
+      alert(`oops wrong guess ${fails} guess remains`)
+    }else{
+
+      alert('loser your score is reset');
+      score = 0;
+      scoreDiv.innerHTML = score;
+    }
 }
 window.localStorage.setItem('score', score);
 startGame();
@@ -37,7 +44,7 @@ function startGame() {
     scoreDiv.innerHTML = score;
     optionDiv.innerHTML = null;
   randomColor = randomColorGenerator();
-  color.innerHTML = randomColor;
+  color.innerHTML = `Whats color is this: ${randomColor} Choose from below options`;
 //   document.body.style.background = randomColor;
 
   const ansIndex = randomNumberGeneratorBetween(0, 5);
