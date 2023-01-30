@@ -30,10 +30,15 @@ function resultValidate(el) {
       fails --;
       alert(`oops wrong guess ${fails} guess remains`)
     }else{
-
-      alert('loser your score is reset');
-      score = 0;
-      scoreDiv.innerHTML = score;
+      fails = 3;
+      if(score == 0){
+        alert('loser');
+        scoreDiv.innerHTML = score;
+      }else{
+        alert('loser your score is reset');
+        score = 0;
+        scoreDiv.innerHTML = score;
+      }
     }
 }
 window.localStorage.setItem('score', score);
